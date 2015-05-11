@@ -38,10 +38,10 @@
             {
                 $.post(url, { num: i })
                     .then(function () {
-                        $("#log").append("<div>" + ++responseCount + " - Success (request #" + i + ")s</div>");
+                        $("#log").append("<div>" + ++responseCount + " - Success (request #" + i + ")</div>");
                     })
                     .fail(function () {
-                        $("#log").append("<div style='color:firebrick'>" + ++responseCount + " - Failed (request # " + i + ")</div>");
+                        $("#log").append("<div style='color:firebrick'>" + ++responseCount + " - Failed (request #" + i + ")</div>");
                     })
             }
         });
