@@ -1,0 +1,50 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        <button id="btnSync" type="button">Run Queries Sync</button> &nbsp; 
+        <button id="btnAsync" type="button">Run Queries Async</button>
+        <div id="log" style="margin-top: 30px"></div>
+    </div>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+        $(function () {
+            var responseCount = 0;
+
+            $("#btnSync,#btnAsync").click(function (evt) {
+                // Setup
+                responseCount = 0;
+                $("#log").empty();
+                
+                // Sync or async
+                var url = this.id == "btnSync" ? "" : "/async";
+
+                // Run
+                for (var i = 1; i <= 20; i++)
+                    post(url, i);
+            });
+
+            function post(url,i)
+            {
+                $.post(url, { num: i })
+                    .then(function () {
+                        $("#log").append("<div>" + ++responseCount + " - Success " + i + "</div>");
+                    })
+                    .fail(function () {
+                        $("#log").append("<div style='color:firebrick'>" + ++responseCount + " - Failed " + i + "</div>");
+                    })
+            }
+        });
+    </script>
+</body>
+</html>
